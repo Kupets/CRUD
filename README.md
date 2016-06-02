@@ -1,4 +1,4 @@
-Spring MVC bootstrap site
+[Spring MVC bootstrap site](http://mytomcatapp2-kupets.rhcloud.com/mvc/messages)
 ==========================
 
 This project is Spring MVC + Bootstrap + Tiles + Hibernate
