@@ -1,7 +1,7 @@
 Spring MVC bootstrap site
 ==========================
 
-This project is Spring MVC + Bootstrap + Tiles application + Hibernate
+This project is Spring MVC + Bootstrap + Tiles + Hibernate
 
 It contains some useful configuration items:
 
