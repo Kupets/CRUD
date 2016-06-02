@@ -12,6 +12,6 @@ It contains some useful configuration items:
 - JQuery 1.11.0
 - Hibernate 4.3.6
 
-![](https://github.com/DanielMichalski/spring-mvc-crud/blob/master/src/main/resources/img/messages.png)
+![](https://github.com/Kupets/spring-mvc-crud/blob/master/src/main/resources/img/messages.png)
 
 
