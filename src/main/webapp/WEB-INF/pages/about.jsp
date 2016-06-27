@@ -59,5 +59,3 @@
 <div class="page-header">
     <h1><a href="https://github.com/Kupets/CRUD">Исходники и подробности реализации в Git</a></h1>
 </div>
-
-Git
