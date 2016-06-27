@@ -1,4 +1,4 @@
-[Spring MVC bootstrap site](http://mytomcatapp2-kupets.rhcloud.com/mvc/messages)
+[Сайт на Spring MVC + bootstrap] (http://mytomcatapp2-kupets.rhcloud.com/mvc/messages)
 ==========================
 
 Проект написан на технологиях Spring MVC + Bootstrap + Tiles + Hibernate:
