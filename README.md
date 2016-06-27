@@ -1,7 +1,7 @@
 [Spring MVC bootstrap site](http://mytomcatapp2-kupets.rhcloud.com/mvc/messages)
 ==========================
 
-# This project is Spring MVC + Bootstrap + Tiles + Hibernate
+This project is Spring MVC + Bootstrap + Tiles + Hibernate
 
 It contains some useful configuration items:
 - Spring 4.1.9
