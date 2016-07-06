@@ -26,5 +26,3 @@
     - [Модальное окно] (https://www.youtube.com/watch?v=St4-x9Cz04A)
 
 ![](https://github.com/Kupets/spring-mvc-crud/blob/master/src/main/resources/img/messages.png)
-
-

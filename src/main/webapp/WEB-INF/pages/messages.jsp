@@ -5,6 +5,8 @@
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx"%>
 
+<c:set var="contextPath" value="${requestScope['javax.servlet.forward.servlet_path']}"/>
+
 <div class="row jumbotron">
     <!-- Jumbotron -->
     <div class="col-md-8 col-md-push-4">
@@ -21,7 +23,7 @@
 
 <hr class="featurette-divider">
 
-<form:form action="messages/add" commandName="message" acceptCharset="UTF-8">
+<form:form action="${contextPath}/messages/add" commandName="message" acceptCharset="UTF-8">
     <!-- Modal -->
     <div class="modal fade" id="addMessageModal" role="dialog">
         <div class="modal-dialog">
@@ -30,6 +32,7 @@
                     <h4 class="modal-title"><spring:message code="page.modal.title"/></h4>
                 </div>
                 <div class="modal-body">
+                    <form:hidden path="id"></form:hidden>
                     <div class="form-group">
                         <label for="header">Заголовок</label>
                         <form:input path="header" cssClass="form-control" placeholder="Зов Ктулху" />
@@ -60,15 +63,31 @@
         <div class="row">
     </c:if>
     <div class="col-lg-4">
-        <h2>${msg.header}</h2>
+        <h2>
+            <c:choose>
+                <c:when test="${not empty msg.link}">
+                    <a href="${msg.link}">${msg.header}</a>
+                </c:when>
+                <c:otherwise>
+                    ${msg.header}
+                </c:otherwise>
+            </c:choose>
+        </h2>
 
         <p>${msg.content}</p>
 
-        <c:if test="${not empty msg.link}">
-            <p><a class="btn btn-primary" href="${msg.link}" role="button"><spring:message code="page.button.more"/> &raquo;</a></p>
-        </c:if>
+        <p>
+            <a class="btn btn-default" href="${contextPath}/messages/edit/${msg.id}" role="button"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+            <a class="btn btn-default" href="${contextPath}/messages/delete/${msg.id}" role="button"><span class="glyphicon glyphicon-remove"></span></a>
+        </p>
     </div>
 </c:forEach>
 <c:if test="${not empty messageList}">
     </div>
+</c:if>
+
+<c:if test="${message.id != null}">
+    <script type="text/javascript">
+        $('#addMessageModal').modal('show');
+    </script>
 </c:if>
