@@ -7,7 +7,7 @@
                 http://www.springframework.org/schema/context
                 http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:property-placeholder location="classpath:properties/app.properties"/>
+    <context:property-placeholder location="classpath:properties/db.properties"/>
 
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames" value="classpath:properties/messages"/>

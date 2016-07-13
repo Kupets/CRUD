@@ -1,14 +1,17 @@
 package ru.ke.repositories;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import ru.ke.model.Message;
 
-/**
- * Created by Crow on 18.05.2016.
- */
-public interface MessageRepository extends PagingAndSortingRepository<Message, Long> {
+public interface MessageRepository extends JpaRepository<Message, Long> {
+    /*
+    * Oracle: SELECT * FROM v$version;
+    * SQL Server: SELECT @@version
+    * MySQL: SELECT VERSION()
+    * */
+    String GET_VERSION = "SELECT VERSION()";
 
-//    @Query("select m from Message m order by m.publishDate")
-//    public Iterable<Message> findByPaging();
+    @Query(value = GET_VERSION, nativeQuery = true)
+    String getDbVersion();
 }

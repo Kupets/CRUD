@@ -30,6 +30,13 @@
 </div>
 
 <div class="panel panel-default">
+    <div class="panel-heading">Логи</div>
+    <div class="panel-body">
+        <code>rhc tail -a &lt;application name&gt;</code>
+    </div>
+</div>
+
+<div class="panel panel-default">
     <div class="panel-heading">Выгрузить приложение</div>
     <div class="panel-body">
         <code>git clone &lt;git url&gt; &lt;directory to create&gt;</code>
@@ -44,17 +51,9 @@
     </div>
 </div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">Логи</div>
-    <div class="panel-body">
-        <code>rhc tail -a &lt;application name&gt;</code>
-    </div>
-</div>
-
 <div class="page-header">
     <h1>Бесплатный MySql сервер <a href="https://www.db4free.net/">db4free.net</a></h1>
 </div>
-
 
 <div class="page-header">
     <h1><a href="https://github.com/Kupets/CRUD">Исходники и подробности реализации в Git</a></h1>

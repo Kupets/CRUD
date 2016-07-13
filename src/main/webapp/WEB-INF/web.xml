@@ -5,7 +5,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
           http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-    <!-- Spring Context locations -->
+    <!-- Spring Context locations (src\main\resources\spring\spring-root.xml, src\main\resources\spring\spring-store.xml) -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:/spring/spring-*.xml</param-value>
@@ -22,6 +22,7 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <!-- Spring MVC Dispatcher Servlet URL mapping -->
     <servlet-mapping>
         <servlet-name>SpringMvc</servlet-name>
         <url-pattern>/mvc/*</url-pattern>
@@ -31,7 +32,7 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-     Problems with encoding
+     <!--Problems with encoding on Spring MVC pages-->
     <filter>
         <filter-name>SetCharacterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

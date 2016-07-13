@@ -10,12 +10,13 @@
 
     <context:component-scan base-package="ru.ke"/>
 
-    <!-- viewResolver without tiles -->
+    <!-- viewResolver without Apache Titles -->
     <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
         <!--<property name="prefix" value="/WEB-INF/pages/"/>-->
         <!--<property name="suffix" value=".jsp"/>-->
     <!--</bean>-->
 
+    <!-- Apache Titles viewResolver -->
     <bean id="tilesViewResolver"
           class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass">

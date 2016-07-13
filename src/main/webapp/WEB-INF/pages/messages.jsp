@@ -5,7 +5,8 @@
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx"%>
 
-<c:set var="contextPath" value="${requestScope['javax.servlet.forward.servlet_path']}"/>
+<c:set var="requestPath" value="${pageContext.servletContext.contextPath}"></c:set>
+<c:url var="servletPath" value="${requestScope['javax.servlet.forward.servlet_path']}"></c:url>
 
 <div class="row jumbotron">
     <!-- Jumbotron -->
@@ -17,13 +18,13 @@
         <p><a class="btn btn-lg btn-success" data-toggle="modal" data-target="#addMessageModal" role="button"><spring:message code="page.button.add"/></a></p>
     </div>
     <div class="col-md-4 col-md-pull-8">
-        <img class="img-circle" width="297" height="297" alt="Fhtagn!" src="/resources/img/fhtagn.jpg" />
+        <img class="img-circle" width="297" height="297" alt="Fhtagn!" src="${requestPath}/resources/img/fhtagn.jpg" />
     </div>
 </div>
 
 <hr class="featurette-divider">
 
-<form:form action="${contextPath}/messages/add" commandName="message" acceptCharset="UTF-8">
+<form:form action="${servletPath}/messages/add" commandName="message" acceptCharset="UTF-8">
     <!-- Modal -->
     <div class="modal fade" id="addMessageModal" role="dialog">
         <div class="modal-dialog">
@@ -47,6 +48,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <%--<button type="submit" class="btn btn-lg btn-success"><spring:message code="${message.id != null && message.id != '' ? 'page.button.edit' : 'page.button.add'}"/></button>--%>
                     <button type="submit" class="btn btn-lg btn-success"><spring:message code="page.button.save"/></button>
                     <button type="button" class="btn btn-lg btn-default" data-dismiss="modal"><spring:message code="page.button.close"/></button>
                 </div>
@@ -77,8 +79,8 @@
         <p>${msg.content}</p>
 
         <p>
-            <a class="btn btn-default" href="${contextPath}/messages/edit/${msg.id}" role="button"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
-            <a class="btn btn-default" href="${contextPath}/messages/delete/${msg.id}" role="button"><span class="glyphicon glyphicon-remove"></span></a>
+            <a class="btn btn-success" href="${servletPath}/messages/edit/${msg.id}" role="button"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+            <a class="btn btn-danger" href="${servletPath}/messages/delete/${msg.id}" role="button"><span class="glyphicon glyphicon-remove"></span></a>
         </p>
     </div>
 </c:forEach>
@@ -86,8 +88,62 @@
     </div>
 </c:if>
 
-<c:if test="${message.id != null}">
-    <script type="text/javascript">
-        $('#addMessageModal').modal('show');
-    </script>
+<c:if test="${messagesPage.totalPages > 1}">
+    <!-- Paging -->
+    <c:set var="firstUrl" value="${servletPath}/messages/1" />
+    <c:set var="lastUrl" value="${servletPath}/messages/${messagesPage.totalPages}" />
+    <c:set var="prevUrl" value="${servletPath}/messages/${currentIndex - 1}" />
+    <c:set var="nextUrl" value="${servletPath}/messages/${currentIndex + 1}" />
+
+    <nav>
+        <ul class="pagination pagination-lg">
+            <c:choose>
+                <c:when test="${currentIndex == 1}">
+                    <li class="disabled"><a href="#">&lt;&lt;</a></li>
+                    <li class="disabled"><a href="#">&lt;</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="${firstUrl}">&lt;&lt;</a></li>
+                    <li><a href="${prevUrl}">&lt;</a></li>
+                </c:otherwise>
+            </c:choose>
+            <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
+                <c:set var="pageUrl" value="${servletPath}/messages/${i}" />
+                <c:choose>
+                    <c:when test="${i == currentIndex}">
+                        <li class="active"><a href="${pageUrl}"><c:out value="${i}" /></a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="${pageUrl}"><c:out value="${i}" /></a></li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+            <c:choose>
+                <c:when test="${currentIndex == messagesPage.totalPages}">
+                    <li class="disabled"><a href="#">&gt;</a></li>
+                    <li class="disabled"><a href="#">&gt;&gt;</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="${nextUrl}">&gt;</a></li>
+                    <li><a href="${lastUrl}">&gt;&gt;</a></li>
+                </c:otherwise>
+            </c:choose>
+        </ul>
+    </nav>
 </c:if>
+
+<!-- Add/edit message dialog -->
+<script type="text/javascript">
+    //<!-- Show when edit -->
+    <c:if test="${message.id != null}">
+        $('#addMessageModal').modal('show');
+    </c:if>
+
+    //<!-- Clear fields after modal was closed -->
+    $('#addMessageModal').on('hidden.bs.modal', function (e) {
+        $('#id').val('');
+        $('#header').val('');
+        $('#content').empty();
+        $('#link').val('');
+    })
+</script>

@@ -3,11 +3,6 @@ package ru.ke.model;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Author: Daniel
- */
-
-
 @Entity
 public class Message {
 
@@ -22,7 +17,7 @@ public class Message {
     private String content;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date publishDate = new Date();
+    private Date publishDate;
 
     @Column(length = 15)
     private String ip;
